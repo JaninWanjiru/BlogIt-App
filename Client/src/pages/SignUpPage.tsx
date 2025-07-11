@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Typography, TextField, Button, Grid, Link } fro
 
 function SignUpPage() {
   return (
-    <Box sx={{ bgcolor: "#f7f9fb",  pt: 2 }}>
+    <Box sx={{ bgcolor: "#fff",  pt: 2 }}>
       <Card sx={{ maxWidth: 440, mx: "auto", my: 5, borderRadius: 4, boxShadow: 3 }}>
         <CardContent sx={{ p: 5 }}>
           <Typography variant="h5" fontWeight="bold" align="center" gutterBottom>
@@ -26,7 +26,6 @@ function SignUpPage() {
                 <TextField
                   placeholder="Enter Last Name"
                   fullWidth
-                  required
                 />
               </Grid>
             </Grid>

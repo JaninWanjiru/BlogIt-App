@@ -35,9 +35,9 @@ const features = [
 
 function LandingPage() {
   return (
-    <Box component="section" sx={{ bgcolor: "#FAF7F3", pb: 5 }}>
+    <Box component="section" sx={{ bgcolor: "#fff", pb: 5 }}>
       <Grid sx={{ textAlign: "center", pt: 8, pb: 4 }}>
-        <Typography variant="h3" color="secondary" gutterBottom>
+        <Typography variant="h3" sx={{fontSize:{xs: "1.4rem", md: "3rem"}}}  color="secondary" gutterBottom>
           Your Ideas Deserve a Platform
         </Typography>
         <Typography variant="h5" color="text.secondary" sx={{ mb: 5 }}>
