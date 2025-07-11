@@ -61,3 +61,10 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (e) {
+    res.status(500).json({ message: "There was a hiccup on our end. Please try again." });
+  }
+};
