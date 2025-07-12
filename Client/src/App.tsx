@@ -8,7 +8,11 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import BlogListPage from "./pages/BlogListPage";
 import FullBlogPage from "./pages/FullBlogPage";
+import Protected from "./components/Protected";
 import ProfilePage from "./pages/ProfilePage";
+import CreateBlogPage from "./pages/CreateBlogPage"
+import EditBlogPage from "./pages/EditBlogPage";
+
 
 const client = new QueryClient()
 const theme = createTheme({
@@ -46,7 +50,9 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/blogs" element={<BlogListPage />} />
           <Route path="/blogs/:id" element={<FullBlogPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={<Protected><ProfilePage /></Protected>} />
+          <Route path="/create-blog" element={<Protected><CreateBlogPage /></Protected>} />
+          <Route path="/edit-blog/:id" element={<Protected><EditBlogPage /></Protected>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
