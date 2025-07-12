@@ -17,43 +17,55 @@ function SignUpPage() {
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Typography>First Name</Typography>
                 <TextField
+                  name="firstName"
                   placeholder="Enter First Name"
                   fullWidth
+                  required
                 />
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Typography>Last Name</Typography>
                 <TextField
+                  name="lasttName"
                   placeholder="Enter Last Name"
                   fullWidth
+                  required
                 />
               </Grid>
             </Grid>
             <Typography>Username</Typography>
             <TextField
+              name="username"
               placeholder="Enter your username"
               fullWidth
+              required
               sx={{ mb: 2 }}
             />
             <Typography>Email</Typography>
             <TextField
+              name="email"
               type="email"
               placeholder="john@gmail.com"
               fullWidth
+              required
               sx={{ mb: 2 }}
             />
             <Typography>Password</Typography>
             <TextField
+              name="password"
               type="password"
               placeholder="Enter your password"
               fullWidth
+              required
               sx={{ mb: 2 }}
             />
             <Typography>Confirm Password</Typography>
             <TextField
+              name="confirmPassword"
               type="password"
               placeholder="Confirm your password"
               fullWidth
+              required
               sx={{ mb: 3 }}
             />
             <Button

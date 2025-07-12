@@ -47,7 +47,7 @@ function LandingPage() {
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 2 }}>
           <Button
             component={Link}
-            to="/blogs/new"
+            to="/signUp"
             variant="contained"
             size="medium"
             startIcon={<NoteAltIcon />}
