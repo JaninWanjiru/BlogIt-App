@@ -64,7 +64,7 @@ function SignUpPage() {
     <Box sx={{ bgcolor: "#fff", pt: 2 }}>
       <Card sx={{ maxWidth: 440, mx: "auto", my: 5, borderRadius: 4, boxShadow: 3 }}>
         <CardContent sx={{ p: 4 }}>
-          <Typography variant="h5" color="primary" textAlign="center" fontWeight="bold" mb={1}>
+          <Typography variant="h5" textAlign="center" fontWeight="bold" mb={1}>
             Claim Your Space on Blogit
           </Typography>
           <Typography textAlign="center" color="#3C3D37" mb={4}>
