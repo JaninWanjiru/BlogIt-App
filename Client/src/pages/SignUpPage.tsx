@@ -1,134 +1,162 @@
-import { Link as Link2 } from "react-router-dom";
-import { Box, Card, CardContent, Typography, TextField, Button, Grid, Link } from "@mui/material";
-import {useState} from 'react';
-import {useMutation} from '@tanstack/react-query';
+import { Link } from "react-router-dom";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Button,
+  Alert,
+} from "@mui/material";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axios";
 
-interface User {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-}
 function SignUpPage() {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPass, setConfirmPass] = useState("")
+  const navigate = useNavigate();
+  
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [error, setError] = useState("");
 
-  const {isPending, mutate}= useMutation({
+  const {isPending, mutate} = useMutation({
     mutationKey: ["signup-user"],
-    mutationFn: async (newUser: User) => {
-      const response = await axios.post("http://localhost:3850/api/auth/register", newUser)
-      console.log(response);
-      return response.data
-  }
-})
+    mutationFn: async (userData: { firstName: string; lastName: string; userName: string; email: string; password: string }) => {
+      const res = await axiosInstance.post("/api/auth/register", userData);
+      return res.data;
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.message);
+      } else {
+        setError("There was a hiccup on our end. Please try again.");
+      }
+    },
+    onSuccess: () => {
+      navigate("/login");
+    },
+  });
 
-  function handleSignUp() {
-    const newUser= {firstName, lastName, username, email, password}
-    console.log(newUser)
-    mutate(newUser)
+  function handleCreateAcc() {
+    setError("");
+    if (pass !== confirmPass) {
+      setError("Passwords don't match");
+      return;
+    }
+
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      userName: userName,
+      email: email,
+      password: pass,
+    };
+    mutate(newUser);
   }
 
   return (
-    <Box sx={{ bgcolor: "#fff",  pt: 2 }}>
+    <Box sx={{ bgcolor: "#fff", pt: 2 }}>
       <Card sx={{ maxWidth: 440, mx: "auto", my: 5, borderRadius: 4, boxShadow: 3 }}>
-        <CardContent sx={{ p: 5 }}>
-          <Typography variant="h5" fontWeight="bold" align="center" gutterBottom>
-            Claim Your Space on BlogIt
+        <CardContent sx={{ p: 4 }}>
+          <Typography variant="h5" color="primary" textAlign="center" fontWeight="bold" mb={1}>
+            Claim Your Space on Blogit
           </Typography>
-          <Typography color="#3C3D37" align="center" sx={{ mb: 4 }}>
+          <Typography textAlign="center" color="#3C3D37" mb={4}>
             You bring the passion. We bring the platform
           </Typography>
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 3 }}>
+              {error}
+            </Alert>
+          )}
+
           <Box component="form">
-            <Grid container spacing={2} sx={{ mb: 2 }}>
-              <Grid size={{ xs: 12, sm: 6 }}>
-                <Typography>First Name</Typography>
-                <TextField
-                  name="firstName"
-                  placeholder="Enter First Name"
-                  fullWidth
-                  required
-                  value={firstName} onChange={(e) => setFirstName(e.target.value)}
-                />
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6 }}>
-                <Typography>Last Name</Typography>
-                <TextField
-                  name="lastName"
-                  placeholder="Enter Last Name"
-                  fullWidth
-                  required
-                  value={lastName} onChange={(e) => setLastName(e.target.value)}
-                />
-              </Grid>
-            </Grid>
-            <Typography>Username</Typography>
-            <TextField
-              name="username"
-              placeholder="Enter your username"
-              fullWidth
-              required
-              value={username} onChange={(e) => setUsername(e.target.value)}
-              sx={{ mb: 2 }}
-            />
-            <Typography>Email</Typography>
-            <TextField
-              name="email"
-              type="email"
-              placeholder="Email address"
-              fullWidth
-              required
-              value={email} onChange={(e) => setEmail(e.target.value)}
-              sx={{ mb: 2 }}
-            />
-            <Typography>Password</Typography>
-            <TextField
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              fullWidth
-              required
-              value={password} onChange={(e) => setPassword(e.target.value)}
-              sx={{ mb: 2 }}
-            />
-            <Typography>Confirm Password</Typography>
-            <TextField
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              fullWidth
-              required
-              value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)}
-              sx={{ mb: 3 }}
-            />
+              <Typography color="primary">First Name</Typography>
+              <TextField
+                fullWidth
+                size="small"
+                placeholder="Enter first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+              <Typography color="primary" mt={1}>Last Name</Typography>
+              <TextField
+                fullWidth
+                size="small"
+                placeholder="Enter last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+              <Typography color="primary" mt={1}>Username</Typography>
+              <TextField
+                fullWidth
+                size="small"
+                placeholder="Choose username"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                required
+              />
+              <Typography color="primary" mt={1}>Email</Typography>
+              <TextField
+                fullWidth
+                size="small"
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <Typography color="primary" mt={1}>Password</Typography>
+              <TextField
+                fullWidth
+                size="small"
+                type="password"
+                placeholder="Enter password"
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
+                required
+              />
+              <Typography color="primary" mt={1}>Confirm Password</Typography>
+              <TextField
+                fullWidth
+                size="small"
+                type="password"
+                placeholder="Confirm password"
+                value={confirmPass}
+                onChange={(e) => setConfirmPass(e.target.value)}
+                required
+              />
             <Button
-              type="button"
               variant="contained"
-              color="primary"
               fullWidth
               size="large"
-              onClick={handleSignUp}
+              onClick={handleCreateAcc}
               loading={isPending}
-              sx={{ fontWeight: "bold", fontSize: 15, borderRadius: 2, mb: 2 }}
+              sx={{ fontWeight: "bold", fontSize: 15, borderRadius: 2, mt: 2 }}
             >
               Create Account
             </Button>
           </Box>
-          <Typography align="center" color="text.secondary" sx={{ mt: 2 }}>
-            Already have an account?{' '}
-            <Link component={Link2} to="/login" color="primary">
-              Sign in here
+
+          <Typography textAlign="center" mt={2} color="text.secondary">
+            Already have an account?{" "}
+            <Link to="/login" style={{ color: "#1976d2", textDecoration: "none" }}>
+              Login here
             </Link>
           </Typography>
         </CardContent>
       </Card>
     </Box>
   );
-};
+}
 
-export default SignUpPage; 
+export default SignUpPage;
