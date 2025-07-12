@@ -1,14 +1,16 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import Header from "./components/Header";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import BlogListPage from "./pages/BlogListPage";
-import NewBlogPage from "./pages/NewBlogPage";
+import FullBlogPage from "./pages/FullBlogPage";
 import ProfilePage from "./pages/ProfilePage";
 
+const client = new QueryClient()
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -32,8 +34,9 @@ const theme = createTheme({
   },
 });
 
-function App() {
+function App() { 
   return (
+    <QueryClientProvider client={client}>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Header />
@@ -41,12 +44,13 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/blogList" element={<BlogListPage />} />
-          <Route path="/newBlog" element={<NewBlogPage />} />
+          <Route path="/blogs" element={<BlogListPage />} />
+          <Route path="/blogs/:id" element={<FullBlogPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
