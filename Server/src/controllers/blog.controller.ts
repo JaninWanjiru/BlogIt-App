@@ -6,10 +6,10 @@ export const createBlog = async (req: Request, res: Response) => {
   try {
     const { title, synopsis, content, featuredImage } = req.body;
     const { id } = req.user;
-    const newBlog = await client.blog.create({
+    await client.blog.create({
       data: { title, synopsis, content, featuredImage, userId: id },
     });
-    res.status(201).json(newBlog);
+    res.status(201).json({msg: "Blog created successfully"});
   } catch (error) {
     res
       .status(500)

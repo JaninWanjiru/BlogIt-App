@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import Header from "./components/Header";
+import { ToastContainer} from 'react-toastify';
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -44,6 +45,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Header />
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
