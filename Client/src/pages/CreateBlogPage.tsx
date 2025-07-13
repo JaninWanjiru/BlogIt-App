@@ -25,7 +25,7 @@ function CreateBlogPage() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        setError(error.response?.data.message);
+        setError(error.response?.data.msg);
       } else {
         setError("There was a hiccup on our end. Please try again.");
       }

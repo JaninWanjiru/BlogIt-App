@@ -1,47 +1,30 @@
-import { AppBar, Toolbar, Box, Stack, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Box, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
+import useUserStore from "../store/userStore";
+import LoggedInHeader from "./LoggedInHeader";
+import LoggedOutHeader from "./LoggedOutHeader";
 
 function Header() {
+  const { user } = useUserStore();
+
   return (
     <AppBar position="static">
       <Toolbar>
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: "none" }}>
           <IconButton
             size="large"
-            sx={{ marginRight: "auto", color: "#fff", fontWeight: "bold" }}
+            sx={{
+              marginRight: "auto",
+              color: "#fff",
+              fontWeight: "bold",
+              fontFamily: '"Corben", serif',
+            }}
           >
             BlogIt
           </IconButton>
         </Link>
         <Box sx={{ flexGrow: 1 }} />
-        <Stack direction="row" spacing={3}>
-          <Link to="/login">
-            <button
-              style={{
-                padding: "0.5rem 1rem",
-                background: "#3C3D37",
-                color: "#fff",
-                border: "none",
-                borderRadius: 6,
-              }}
-            >
-              Login
-            </button>
-          </Link>
-          <Link to="/signup">
-            <button
-              style={{
-                padding: "0.5rem 1rem",
-                background: "#3C3D37",
-                color: "#fff",
-                border: "none",
-                borderRadius: 6,
-              }}
-            >
-              Sign Up
-            </button>
-          </Link>
-        </Stack>
+        {user ? <LoggedInHeader user={user} /> : <LoggedOutHeader />}
       </Toolbar>
     </AppBar>
   );
