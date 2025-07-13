@@ -8,7 +8,7 @@ function Header() {
         <Link to="/">
           <IconButton
             size="large"
-            sx={{ marginRight: "auto", color: "#fff", fontWeight: "bold", fontFamily: '"Corben", serif' }}
+            sx={{ marginRight: "auto", color: "#fff", fontWeight: "bold" }}
           >
             BlogIt
           </IconButton>
