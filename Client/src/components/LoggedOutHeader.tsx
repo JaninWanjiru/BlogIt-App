@@ -8,7 +8,7 @@ function LoggedOutHeader() {
         <button
           style={{
             padding: "0.5rem 1rem",
-            background: "#3C3D37",
+            background: "#2c4647ff",
             color: "#fff",
             border: "none",
             borderRadius: 6,
@@ -22,7 +22,7 @@ function LoggedOutHeader() {
         <button
           style={{
             padding: "0.5rem 1rem",
-            background: "#3C3D37",
+            background: "#2c4647ff",
             color: "#fff",
             border: "none",
             borderRadius: 6,

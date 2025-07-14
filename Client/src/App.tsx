@@ -18,14 +18,17 @@ import EditBlogPage from "./pages/EditBlogPage";
 const client = new QueryClient()
 const theme = createTheme({
   palette: {
-    mode: "light",
     primary: {
-      main: "#8D6E63",
+      main: "#379cb6ff",        
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#77655fff",
+      main: "#094a59ff",        
       contrastText: "#ffffff",
+    },
+    text: {
+      primary: "#2C2C2C",        
+      secondary: "#4B4B4B",
     },
   },
   typography: {

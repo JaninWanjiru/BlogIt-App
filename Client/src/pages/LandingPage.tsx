@@ -51,7 +51,7 @@ function LandingPage() {
             variant="contained"
             size="medium"
             startIcon={<NoteAltIcon />}
-            sx={{ bgcolor: "#3C3D37", fontSize: 14, borderRadius: 2 }}
+            sx={{ bgcolor: "#2c4647ff", fontSize: 14, borderRadius: 2 }}
           >
             Start Writing
           </Button>
@@ -60,7 +60,7 @@ function LandingPage() {
             to="/blogs"
             variant="contained"
             size="medium"
-            sx={{ bgcolor: "#3C3D37", fontSize: 14, borderRadius: 2, ml: 2 }}
+            sx={{ bgcolor: "#2c4647ff", fontSize: 14, borderRadius: 2, ml: 2 }}
           >
             Read Stories
           </Button>
