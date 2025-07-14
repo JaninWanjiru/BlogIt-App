@@ -12,7 +12,7 @@ function LoggedInHeader({ user }: LoggedInHeaderProps) {
   const navLinks = [
     { label: "Blogs", path: "/blogs" },
     { label: "New Blog", path: "/create-blog" },
-    // { label: "Profile", path: "/profile" },
+    { label: "Profile", path: "/profile" },
   ];
 
   return (

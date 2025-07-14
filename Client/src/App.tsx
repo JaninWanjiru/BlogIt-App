@@ -29,7 +29,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Corben", serif',
+    fontFamily: '"Quicksand", sans-serif',
     h3: {
       fontWeight: 700,
     },

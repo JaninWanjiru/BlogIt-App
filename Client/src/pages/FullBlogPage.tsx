@@ -1,7 +1,7 @@
 function FullBlogPage() {
-  return(
+  return (
     <></>
-  );
+  )
 }
 
-export default FullBlogPage;
+export default FullBlogPage

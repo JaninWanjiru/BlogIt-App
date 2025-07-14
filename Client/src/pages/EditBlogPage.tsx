@@ -1,7 +1,7 @@
 function EditBlogPage() {
-  return(
+  return (
     <></>
-  );
+  )
 }
 
 export default EditBlogPage;
