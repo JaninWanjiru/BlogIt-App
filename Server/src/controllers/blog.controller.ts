@@ -97,21 +97,11 @@ export const updateBlog = async (req: Request, res: Response) => {
   try {
     const { blogId } = req.params;
     const { title, synopsis, content, featuredImage } = req.body;
-    const { id } = req.user;
-    const blog = await client.blog.findFirst({
-      where: {
-        AND: [{ id: blogId }, { userId: id }, { isDeleted: false }]
-      }
-    });
-    if (!blog) {
-      res.status(404).json({message: "Blog not found"});
-      return;
-    }
-    await client.blog.update({
+    const updatedBlog = await client.blog.update({
       where: { id: blogId },
       data: { title, synopsis, content, featuredImage },
     });
-    res.status(200).json({ message: "Blog updated successfully" });
+    res.status(200).json(updatedBlog);
   } catch (error) {
     res
       .status(500)
@@ -123,16 +113,6 @@ export const updateBlog = async (req: Request, res: Response) => {
 export const deleteBlog = async (req: Request, res: Response) => {
   try {
     const { blogId } = req.params;
-    const { id } = req.user;
-    const blog = await client.blog.findFirst({
-      where: {
-        AND: [{ id: blogId }, { userId: id }, { isDeleted: false }]
-      }
-    });
-    if (!blog) {
-      res.status(404).json({message: "Blog not found"});
-      return;
-    }
     await client.blog.update({
       where: { id: blogId },
       data: { isDeleted: true },

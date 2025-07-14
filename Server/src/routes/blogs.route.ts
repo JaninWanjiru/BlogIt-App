@@ -8,7 +8,7 @@ router.post('/',userVerification, createBlog);
 router.get("/", userVerification, getAllBlogs)
 router.get("/user", userVerification, getUserBlogs)
 router.get("/:blogId", userVerification, getBlog)
-router.put("/:blogId", userVerification, updateBlog)
+router.patch("/:blogId", userVerification, updateBlog)
 router.delete("/:blogId", userVerification, deleteBlog)
 
 export default router;
