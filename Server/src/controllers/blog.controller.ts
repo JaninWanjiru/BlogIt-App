@@ -47,9 +47,9 @@ export const getUserBlogs = async (req: Request, res: Response) => {
   try {
     const { id } = req.user;
     const blogs = await client.blog.findMany({
-      where: { 
+      where: {
         userId: id,
-        isDeleted: false 
+        isDeleted: false,
       },
       include: {
         user: {
@@ -74,17 +74,24 @@ export const getUserBlogs = async (req: Request, res: Response) => {
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const { blogId } = req.params;
-    const {id} = req.user
+    // const { id } = req.user;
     const blog = await client.blog.findFirst({
-      where: {
-        AND: [{ id: blogId }, { userId: id }, { isDeleted: false }]
-      }
+      where: { id: blogId },
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            profilePic: true,
+          },
+        },
+      },
     });
     if (!blog) {
-      res.status(404).json({message: "Blog not found"});
+      res.status(404).json({ message: "Blog not found" });
       return;
     }
-    res.status(200).json(blog)
+    res.status(200).json(blog);
   } catch (error) {
     res
       .status(500)
@@ -124,4 +131,3 @@ export const deleteBlog = async (req: Request, res: Response) => {
       .json({ message: "There was a hiccup on our end. Please try again." });
   }
 };
-

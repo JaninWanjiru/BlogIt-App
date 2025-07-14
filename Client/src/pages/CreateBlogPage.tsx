@@ -1,11 +1,13 @@
 import {Box, Card, CardContent, Typography, TextField, Button, Alert} from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import axiosInstance from "../api/axios";
 import { toast } from 'react-toastify';
 
 function CreateBlogPage() {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [synopsis, setSynopsis] = useState("");
   const [content, setContent] = useState("");
@@ -32,9 +34,10 @@ function CreateBlogPage() {
     },
     onSuccess: () => {
       toast.success('Blog created successfully', {
-        theme: "colored",
+        theme: "light",
         position: "top-center"
       })
+      navigate("/blogs");
     },
   });
 

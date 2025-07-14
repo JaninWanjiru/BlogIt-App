@@ -57,12 +57,12 @@ function LandingPage() {
           </Button>
           <Button
             component={Link}
-            to="/login"
+            to="/blogs"
             variant="contained"
             size="medium"
             sx={{ bgcolor: "#3C3D37", fontSize: 14, borderRadius: 2, ml: 2 }}
           >
-            Sign In
+            Read Stories
           </Button>
         </Box>
       </Grid>

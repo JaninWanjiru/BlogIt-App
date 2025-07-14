@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 
 const client = new PrismaClient();
 
+// functionality to register/sign up user
 export const register = async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, userName, email, password } = req.body;
@@ -18,6 +19,8 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
+
+// functionality to login user
 export const login = async (req: Request, res: Response) => {
   try {
     // get the identifier and password sent by user from req.body
@@ -61,6 +64,18 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+
+// functionality to logout a user
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (e) {
+    res.status(500).json({ message: "There was a hiccup on our end. Please try again." });
+  }
+}
+
+
+// functionality to update user information.
 export const updateProfile = async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, userName, email } = req.body;
@@ -77,6 +92,8 @@ export const updateProfile = async (req: Request, res: Response) => {
   }
 };
 
+
+// functionality to update user password
 export const updatePassword = async (req: Request, res: Response) => {
   try {
     const { current, new: newPassword } = req.body;
@@ -106,10 +123,3 @@ export const updatePassword = async (req: Request, res: Response) => {
   }
 };
 
-export const logout = async (req: Request, res: Response) => {
-  try {
-    res.status(200).json({ message: "Logged out successfully" });
-  } catch (e) {
-    res.status(500).json({ message: "There was a hiccup on our end. Please try again." });
-  }
-}

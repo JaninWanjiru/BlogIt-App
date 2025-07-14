@@ -27,8 +27,8 @@ function SignUpPage() {
 
   const {isPending, mutate} = useMutation({
     mutationKey: ["signup-user"],
-    mutationFn: async (userData: { firstName: string; lastName: string; userName: string; email: string; password: string }) => {
-      const res = await axiosInstance.post("/api/auth/register", userData);
+    mutationFn: async (newUser: { firstName: string; lastName: string; userName: string; email: string; password: string }) => {
+      const res = await axiosInstance.post("/api/auth/register", newUser);
       return res.data;
     },
     onError: (error) => {
@@ -41,7 +41,7 @@ function SignUpPage() {
     onSuccess: () => {
       navigate("/login");
     },
-  });
+  }); 
 
   function handleCreateAcc() {
     setError("");
