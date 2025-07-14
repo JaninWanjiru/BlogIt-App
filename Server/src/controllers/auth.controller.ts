@@ -58,7 +58,11 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign(userDetails, process.env.JWT_SECRET!)
     
     // send the token back to the user as a cookie after a successful login
-    res.cookie("authToken", token).json(userDetails)
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // true on Render
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    }).json(userDetails)
   } catch (e) {
     res.status(500).json({ message: "There was a hiccup on our end. Please try again." });
   }
